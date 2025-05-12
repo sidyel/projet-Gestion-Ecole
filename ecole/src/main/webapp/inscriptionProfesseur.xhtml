@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Inscription Professeur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('resources/images/bag3.jpg'); /* Assurez-vous que le chemin est correct */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #8B4513; /* Marron */
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .ui-panel {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.9); /* Opacité pour rendre le fond légèrement transparent */
+            padding: 20px;
+            width: 500px;
+            margin: 30px auto;
+            background-color: #F5F5DC; /* Beige clair pour le fond */
+        }
+
+        .ui-panel h3.ui-panel-title {
+            background-color: #8B4513; /* Marron */
+            color: white;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            font-size: 18px;
+        }
+
+        .ui-panelGrid label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #4B2E2A; /* Marron foncé */
+        }
+
+        .ui-inputfield, .ui-calendar, .ui-password, .ui-selectonemenu {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #B5651D; /* Marron */
+            border-radius: 4px;
+            margin-bottom: 12px;
+            background-color: #FFF8E1; /* Beige très clair */
+        }
+
+        .ui-button {
+            background-color: #8B4513; /* Marron */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .ui-button:hover {
+            background-color: #6A2C1C; /* Marron foncé */
+        }
+
+        .ui-message {
+            background-color: #D2B48C; /* Beige clair pour les messages */
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <!-- En-tête -->
+    <header>
+        <h2>
+            <i class="pi pi-user-plus" style="font-size: 2em; margin-right: 10px;"></i>
+            Inscription Professeur
+        </h2>
+    </header>
+
+    <h:form>
+        <p:panel header="Inscription Professeur" styleClass="ui-panel">
+            <p:messages autoUpdate="true" />
+            <p:panelGrid columns="2" styleClass="ui-panelGrid">
+                <!-- Champs d'inscription pour le professeur -->
+                <p:outputLabel value="Nom :" for="nom" />
+                <p:inputText id="nom" value="#{professeurBean.personne.nom}" required="true" />
+
+                <p:outputLabel value="Prénom :" for="prenom" />
+                <p:inputText id="prenom" value="#{professeurBean.personne.prenom}" required="true" />
+
+                <p:outputLabel value="Email :" for="email" />
+                <p:inputText id="email" value="#{professeurBean.personne.email}" required="true" />
+
+                <p:outputLabel value="Adresse :" for="adresse" />
+                <p:inputText id="adresse" value="#{professeurBean.personne.adresse}" required="true" />
+
+                <p:outputLabel value="Téléphone :" for="telephone" />
+                <p:inputText id="telephone" value="#{professeurBean.personne.telephone}" required="true" />
+
+                <p:outputLabel value="Login :" for="login" />
+                <p:inputText id="login" value="#{professeurBean.personne.login}" required="true" />
+
+                <p:outputLabel value="Mot de passe :" for="password" />
+                <p:password id="password" value="#{professeurBean.personne.password}" required="true" />
+
+                <p:outputLabel value="Date de naissance :" for="datenaissance" />
+                <p:calendar id="datenaissance"
+                            value="#{professeurBean.personne.datenaissance}" pattern="dd/MM/yyyy"
+                            showButtonPanel="true" required="true" />
+
+                <p:outputLabel value="Cours :" for="cours" />
+                <p:selectOneMenu id="cours" value="#{professeurBean.selectedCoursId}" required="true">
+                    <f:selectItems value="#{professeurBean.coursList}" var="cours"
+                                   itemValue="#{cours.idCours}" itemLabel="#{cours.matiere}" />
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Salaire :" for="salaire" />
+                <p:inputText id="salaire" value="#{professeurBean.professeur.salaire}" required="true" />
+
+                <p:commandButton value="S'inscrire"
+                                 action="#{professeurBean.inscrire}" styleClass="ui-button" />
+            </p:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+
+</html>

@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Recherche d'élèves</title>
+</h:head>
+<f:metadata>
+    <f:viewParam name="code" value="#{eleveBean.selectedClasseId}" />
+	<f:viewAction action="#{eleveBean.chargerEleve}" />
+</f:metadata> 
+<h:body>
+	<h:form>
+		
+
+		<!-- Tableau des résultats -->
+		<p:dataTable id="elevesTable" value="#{eleveBean.e}"
+			var="eleve" style="width:100%; margin-top:20px;">
+			<p:column headerText="Nom">
+				<h:outputText value="#{eleve.personne.nom}" />
+			</p:column>
+			<p:column headerText="Prénom">
+				<h:outputText value="#{eleve.personne.prenom}" />
+			</p:column>
+			<p:column headerText="Adresse">
+				<h:outputText value="#{eleve.personne.adresse}" />
+			</p:column>
+			<p:column headerText="Email" style="width:20%">
+				<h:outputText value="#{eleve.personne.email}" />
+			</p:column>
+			<p:column headerText="allergie">
+				<h:outputText value="#{eleve.allergie}" />
+			</p:column>
+			<p:column headerText="Telephone">
+				<h:outputText value="#{eleve.p}" />
+			</p:column>
+			<p:column headerText="Telephone">
+				<h:outputText value="#{eleve.personne.telephone}" />
+			</p:column>
+			<p:column headerText="Date de Naissance">
+				<h:outputText value="#{eleve.personne.datenaissance}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Consultation">
+				<p:button style="width:100%" value="Consultation" outcome="ajouterConsultation.xhtml">
+					<f:param name="code3" value="#{eleve.idEleve}" />
+				</p:button>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

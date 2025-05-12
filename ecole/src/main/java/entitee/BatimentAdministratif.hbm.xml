@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.BatimentAdministratif" table="batiment_administratif" schema="public" optimistic-lock="version">
+        <id name="idBat" type="string">
+            <column name="id_bat" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ecole" class="entitee.Ecole" fetch="select">
+            <column name="id_ecole" />
+        </many-to-one>
+        <property name="nbreSalles" type="java.lang.Integer">
+            <column name="nbre_salles" />
+        </property>
+        <property name="nom" type="string">
+            <column name="nom" length="254" />
+        </property>
+    </class>
+</hibernate-mapping>

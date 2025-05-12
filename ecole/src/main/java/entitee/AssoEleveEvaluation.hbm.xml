@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.AssoEleveEvaluation" table="asso_eleve_evaluation" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="entitee.AssoEleveEvaluationId">
+            <key-property name="idEleve" type="int">
+                <column name="id_eleve" />
+            </key-property>
+            <key-property name="idEvaluation" type="int">
+                <column name="id_evaluation" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="eleve" class="entitee.Eleve" update="false" insert="false" fetch="select">
+            <column name="id_eleve" not-null="true" />
+        </many-to-one>
+        <many-to-one name="evaluation" class="entitee.Evaluation" update="false" insert="false" fetch="select">
+            <column name="id_evaluation" not-null="true" />
+        </many-to-one>
+        <property name="note" type="java.lang.Float">
+            <column name="note" precision="8" scale="8" />
+        </property>
+    </class>
+</hibernate-mapping>

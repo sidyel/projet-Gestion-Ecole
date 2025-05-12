@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.Evaluation" table="evaluation" schema="public" optimistic-lock="version">
+        <id name="idEvaluation" type="int">
+            <column name="id_evaluation" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cours" class="entitee.Cours" fetch="select">
+            <column name="id_cours" />
+        </many-to-one>
+        <property name="date" type="date">
+            <column name="date" length="13" />
+        </property>
+        <property name="hdebut" type="date">
+            <column name="hdebut" length="13" />
+        </property>
+        <property name="hfin" type="date">
+            <column name="hfin" length="13" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="254" />
+        </property>
+        <set name="assoEleveEvaluations" table="asso_eleve_evaluation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_evaluation" not-null="true" />
+            </key>
+            <one-to-many class="entitee.AssoEleveEvaluation" />
+        </set>
+    </class>
+</hibernate-mapping>

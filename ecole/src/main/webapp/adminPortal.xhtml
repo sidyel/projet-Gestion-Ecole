@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Portail Administrateur</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5dc; /* Beige clair pour le fond */
+            background-image: url('resources/images/bag3.jpg'); /* Image de fond */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #4b3621; /* Marron pour le texte */
+        }
+        header {
+            background-color: #8b5e3c; /* Marron pour l'en-tête */
+            padding: 10px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .pi {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .portal-container {
+            max-width: 600px;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.9); /* Beige clair avec opacité */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 2rem auto;
+        }
+        .text-center h1 {
+            color: #4b3621; /* Marron foncé pour le titre principal */
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .p-button {
+            flex: 1 1 45%;
+            padding: 0.8rem;
+        }
+        /* Boutons personnalisés dans les tons marron et beige */
+        .p-button-success {
+            background-color: #d2b48c; /* Beige foncé */
+            border-color: #8b5e3c; /* Marron foncé */
+            color: #4b3621;
+        }
+        .p-button-info {
+            background-color: #deb887; /* Beige doux */
+            border-color: #8b5e3c;
+            color: #4b3621;
+        }
+        .p-button-warning {
+            background-color: #a0522d; /* Marron modéré */
+            border-color: #8b5e3c;
+            color: #fff;
+        }
+        .p-button-secondary {
+            background-color: #bc8f8f; /* Marron rosé */
+            border-color: #8b5e3c;
+            color: #fff;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <!-- Header avec titre -->
+    <header>
+        <h2>
+            <i class="pi pi-cog"></i>
+            Portail Administrateur
+        </h2>
+    </header>
+
+    <div class="p-d-flex p-jc-center p-mt-5">
+        <div class="portal-container">
+            <div class="text-center mb-4">
+                <h1>Gérer les Ressources</h1>
+            </div>
+
+            <h:form>
+                <div class="button-group">
+                   <p:commandButton value="Ajouter un Bus" action="ajouterBus.xhtml" styleClass="p-button-rounded p-button-success" icon="pi pi-plus" />
+                    <p:commandButton value="Ajouter un Rôle" action="ajouteRole.xhtml" styleClass="p-button-rounded p-button-info" icon="pi pi-id-card" />
+                    <p:commandButton value="Ajouter une Salle" action="ajouterSalle.xhtml" styleClass="p-button-rounded p-button-warning" icon="pi pi-home" />
+                    <p:commandButton value="Organiser activité" action="organiserActivite.xhtml" styleClass="p-button-rounded p-button-secondary" icon="pi pi-calendar-plus" />
+                    <p:commandButton value="Ajouter un Utilisateur" action="choixInscription.xhtml" styleClass="p-button-rounded p-button-primary" icon="pi pi-user-plus" />
+                </div>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

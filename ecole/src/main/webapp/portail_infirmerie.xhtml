@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Accueil Infirmier</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+    <style>
+        body {
+            background-image: url('resources/images/bag3.jpg'); /* Chemin vers l'image de fond */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #6f4f37; /* Marron comme couleur de fond */
+            padding: 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .pi {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .card {
+            transition: transform 0.3s;
+            background-color: rgba(255, 255, 255, 0.9); /* Opacité pour lisibilité */
+            border: 1px solid #6f4f37; /* Bordure marron pour les cartes */
+        }
+        .card:hover {
+            transform: scale(1.05);
+            border-color: #8b5e3c; /* Changer la bordure au survol */
+        }
+        .container {
+            margin-top: 5rem;
+        }
+        .btn-primary, .btn-secondary {
+            background-color: #6f4f37; /* Couleur de fond marron pour les boutons */
+            border-color: #6f4f37; /* Bordure marron */
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            background-color: #8b5e3c; /* Couleur marron clair au survol */
+            border-color: #8b5e3c; /* Bordure marron clair */
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <!-- En-tête avec Titre et Icône -->
+    <header>
+        <h2>
+            <i class="pi pi-user-md"></i>
+            Accueil Infirmier
+        </h2>
+    </header>
+
+    <div class="container">
+        <!-- Titre principal -->
+        <h1 class="text-center mb-4">Portail de l'Infirmier</h1>
+
+        <!-- Texte de bienvenue -->
+        <p class="text-center lead mb-4">
+            Bienvenue sur votre portail. Utilisez les options ci-dessous pour gérer les consultations, les patients et les autres tâches infirmières.
+        </p>
+
+        <!-- Section de boutons -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Ajouter Consultation</h5>
+                        <p:button value="Ajouter" icon="pi pi-plus"
+                                  styleClass="btn btn-primary btn-lg"
+                                  outcome="ajouterConsultation.xhtml" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Consulter l'Historique</h5>
+                        <p:button value="Consulter" icon="pi pi-calendar"
+                                  styleClass="btn btn-secondary btn-lg"
+                                  outcome="interfaceInfirmier.xhtml" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</h:body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Enregistrement du Bus</title>
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5dc; /* Beige clair pour le fond */
+            background-image: url('resources/images/bag3.jpg'); /* Image de fond */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #4b3621; /* Marron pour le texte */
+        }
+        header {
+            background-color: #8b5e3c; /* Marron pour l'en-tête */
+            padding: 10px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .pi {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .form-container {
+            max-width: 500px;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.85); /* Opacité pour lisibilité */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 5rem auto;
+        }
+        header .p-button {
+            background: transparent;
+            color: white;
+            border: none;
+            margin-right: 10px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <!-- Header avec titre -->
+    <header>
+        <h2>
+            <i class="pi pi-bus"></i>
+            Enregistrement du Bus
+        </h2>
+        <p:commandButton icon="pi pi-home" value="Accueil" styleClass="p-button" 
+                 action="adminPortal.xhtml" />
+        
+    </header>
+
+    <div class="p-d-flex p-jc-center">
+        <div class="form-container">
+            <h:form id="busForm">
+                <p:panel header="Nouveau Bus" style="width: 100%;">
+                    <p:messages />
+                    <h:panelGrid columns="1" styleClass="p-fluid">
+                        <!-- Horaires -->
+                        <p:outputLabel for="horaires" value="Horaires:" />
+                        <p:inputText id="horaires" value="#{busTransportBean.busTransport.horaires}" required="true" />
+
+                        <!-- Itinéraire -->
+                        <p:outputLabel for="itineraire" value="Itinéraire:" />
+                        <p:inputText id="itineraire" value="#{busTransportBean.busTransport.itineraire}" required="true" />
+
+                        <!-- Prix -->
+                        <p:outputLabel for="prix" value="Prix:" />
+                        <p:inputText id="prix" value="#{busTransportBean.busTransport.prix}" required="true" />
+
+                        <!-- Sélection du chauffeur -->
+                        <p:outputLabel for="personnel" value="Chauffeur:" />
+                        <p:selectOneMenu id="personnel" value="#{busTransportBean.chauffeurId}">
+                            <f:selectItem itemLabel="Sélectionnez un chauffeur" itemValue="" />
+                            <f:selectItems value="#{busTransportBean.personnelList}" var="personnel"
+                                           itemValue="#{personnel.idPersonnel}" itemLabel="#{personnel.personne.nom}" />
+                        </p:selectOneMenu>
+
+                        <!-- Bouton Enregistrer -->
+                        <p:commandButton value="Enregistrer" action="#{busTransportBean.enregistrerBus}" update="busForm" styleClass="p-mt-3" />
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

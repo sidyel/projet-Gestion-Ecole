@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Emploi du Temps</title>
+    <h:outputStylesheet name="styles.css" />
+    <h:outputStylesheet library="primeicons" name="primeicons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+</h:head>
+
+<h:body style="background-image: url('resources/images/bag3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: rgba(0, 0, 0, 0.6); background-blend-mode: overlay;">
+    <!-- Header avec titre et boutons -->
+    <header style="background-color: #8B4513; padding: 15px; color: white; display: flex; align-items: center; justify-content: space-between;">
+        <h2 style="margin: 0; display: flex; align-items: center;">
+            <i class="pi pi-calendar" style="font-size: 1.5em; margin-right: 10px;"></i>
+            Emploi du Temps
+        </h2>
+        <div>
+            <p:commandButton 
+    icon="pi pi-home" 
+    value="Accueil" 
+    action="eleve_home?faces-redirect=true" 
+    style="background-color: transparent; color: white; border: none; padding: 10px 15px; font-weight: bold; border-radius: 5px;" />
+
+             <p:commandButton icon="pi pi-sign-out" value="Déconnexion" action="#{portalBean.logout}" style="background: transparent; color: white; border: none;" />
+        </div>
+    </header>
+
+    <h:form>
+        <!-- Menu déroulant pour sélectionner une classe -->
+        <p:panel header="Sélectionner une classe" style="width: 90%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); background-color: rgba(255, 255, 255, 0.9); padding: 20px;">
+    <h:outputLabel value="Sélectionner une classe : " for="classeSelect" style="color: #8B4513; font-size: 1.1em;" />
+    <p:selectOneMenu id="classeSelect"
+                     value="#{emploiDuTempsBean.selectedClasseId}" style="width: 200px;">
+        <f:selectItem itemLabel="Sélectionnez" itemValue="" />
+        <f:selectItems value="#{sessionScope.role eq 'PROFESSEUR' ? evaluationBean.classesList : emploiDuTempsBean.classesList}"
+                       var="classes" itemLabel="#{classes.nom}" itemValue="#{classes.idclasse}" />
+    </p:selectOneMenu>
+
+    <!-- Bouton pour charger l'emploi du temps -->
+    <p:commandButton value="Charger Emploi du Temps"
+                     action="#{emploiDuTempsBean.chargerEmploiDuTemps}"
+                     update="emploiTable"
+                     style="width: 100%; margin-top: 20px; background-color: #8B4513; color: white; font-weight: bold; border-radius: 5px;" />
+</p:panel>
+
+
+        <!-- Tableau pour afficher l'emploi du temps -->
+        <p:panel header="Emploi du Temps" style="width: 90%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); background-color: rgba(255, 255, 255, 0.9); padding: 20px;">
+            <p:dataTable id="emploiTable" value="#{emploiDuTempsBean.emploiDuTemps}"
+                         var="ligne" paginator="true" rows="10" style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+
+                <p:column headerText="Jour et Date">
+                    <h:outputText value="#{ligne[0]}">
+                        <f:convertDateTime pattern="EEEE, dd MMMM yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Heure Début">
+                    <h:outputText value="#{ligne[1]}">
+                        <f:convertDateTime pattern="HH:mm" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Heure Fin">
+                    <h:outputText value="#{ligne[2]}">
+                        <f:convertDateTime pattern="HH:mm" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Cours">
+                    <h:outputText value="#{ligne[3]}" />
+                </p:column>
+                <p:column headerText="Professeur">
+                    <h:outputText value="#{ligne[4]} #{ligne[5]}" />
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

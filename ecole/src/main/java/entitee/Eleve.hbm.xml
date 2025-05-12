@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.Eleve" table="eleve" schema="public" optimistic-lock="version">
+        <id name="idEleve" type="int">
+            <column name="id_eleve" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="busTransport" class="entitee.BusTransport" fetch="select">
+            <column name="id_bus" />
+        </many-to-one>
+        <many-to-one name="cantine" class="entitee.Cantine" fetch="select">
+            <column name="id_cantine" />
+        </many-to-one>
+        <many-to-one name="classes" class="entitee.Classes" fetch="select">
+            <column name="idclasse" />
+        </many-to-one>
+        <many-to-one name="ecole" class="entitee.Ecole" fetch="select">
+            <column name="id_ecole" />
+        </many-to-one>
+        <many-to-one name="infirmerie" class="entitee.Infirmerie" fetch="select">
+            <column name="idinfirmerie" />
+        </many-to-one>
+        <many-to-one name="personne" class="entitee.Personne" fetch="select">
+            <column name="id_personne" />
+        </many-to-one>
+        <property name="nbAbsences" type="java.lang.Integer">
+            <column name="nb_absences" />
+        </property>
+        <set name="activiteExtras" table="asso_eleve_activite" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_eleve" not-null="true" />
+            </key>
+            <many-to-many entity-name="entitee.ActiviteExtra">
+                <column name="id_activite" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="assoEleveEvaluations" table="asso_eleve_evaluation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_eleve" not-null="true" />
+            </key>
+            <one-to-many class="entitee.AssoEleveEvaluation" />
+        </set>
+        <set name="paiements" table="paiement" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_eleve" />
+            </key>
+            <one-to-many class="entitee.Paiement" />
+        </set>
+        <set name="absences" table="absence" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_eleve" />
+            </key>
+            <one-to-many class="entitee.Absence" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.Personne" table="personne" schema="public" optimistic-lock="version">
+        <id name="idPersonne" type="int">
+            <column name="id_personne" />
+            <generator class="assigned" />
+        </id>
+        <property name="adresse" type="string">
+            <column name="adresse" length="254" />
+        </property>
+        <property name="datenaissance" type="date">
+            <column name="datenaissance" length="13" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="254" />
+        </property>
+        <property name="login" type="string">
+            <column name="login" length="254" />
+        </property>
+        <property name="nom" type="string">
+            <column name="nom" length="254" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="254" />
+        </property>
+        <property name="prenom" type="string">
+            <column name="prenom" length="254" />
+        </property>
+        <property name="telephone" type="string">
+            <column name="telephone" length="254" />
+        </property>
+        <set name="eleves" table="eleve" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_personne" />
+            </key>
+            <one-to-many class="entitee.Eleve" />
+        </set>
+        <set name="tuteurs" table="tuteur" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_personne" not-null="true" />
+            </key>
+            <one-to-many class="entitee.Tuteur" />
+        </set>
+        <set name="professeurs" table="professeur" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_personne" />
+            </key>
+            <one-to-many class="entitee.Professeur" />
+        </set>
+        <set name="personnels" table="personnel" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_personne" />
+            </key>
+            <one-to-many class="entitee.Personnel" />
+        </set>
+        <set name="administrateurs" table="administrateur" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_personne" />
+            </key>
+            <one-to-many class="entitee.Administrateur" />
+        </set>
+    </class>
+</hibernate-mapping>

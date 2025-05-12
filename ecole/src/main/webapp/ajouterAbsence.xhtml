@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Ajouter une Absence</title>
+    <h:outputStylesheet name="styles.css" />
+    <h:outputStylesheet library="primeicons" name="primeicons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+    <style>
+        /* Style de fond et configuration de la page */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('resources/images/bag3.jpg'); /* Chemin de l'image de fond */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: rgba(139, 69, 19, 0.9); /* Marron pour le header */
+            padding: 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .pi {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        header .p-button {
+            background: transparent;
+            color: white;
+            border: none;
+            margin-right: 10px;
+        }
+        header .p-button:hover {
+            background-color: rgba(139, 69, 19, 0.7); /* Changer légèrement la couleur au survol */
+        }
+        .form-container {
+            max-width: 800px;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8); /* Fond de la boîte */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 2rem auto;
+        }
+        /* Personnalisation des boutons */
+        .p-button {
+            background-color: #8B4513; /* Marron pour les boutons */
+            color: white;
+            border: none;
+        }
+        .p-button:hover {
+            background-color: #6A3E1F; /* Teinte plus foncée au survol */
+        }
+    </style>
+</h:head>
+
+<f:metadata>
+    <f:viewParam name="code1" value="#{absenceBean.eleveId}" />
+</f:metadata>
+
+<h:body>
+    <!-- Header avec titre et navigation similaire -->
+    <header>
+        <h2>
+            <i class="pi pi-calendar-times"></i>
+            Ajouter une Absence
+        </h2>
+        <div>
+            <p:commandButton icon="pi pi-home" value="Accueil" styleClass="p-button" />
+            <p:commandButton icon="pi pi-arrow-left" value="Retour" action="eleveHome.xhtml" styleClass="p-button" />
+            <p:commandButton icon="pi pi-sign-out" value="Déconnexion" action="#{surveillantBean.logout}" styleClass="p-button" />
+        </div>
+    </header>
+
+    <div class="p-d-flex p-jc-center p-mt-5">
+        <div class="form-container">
+            <h:form id="absenceForm">
+                <p:panel header="Détails de l'Absence">
+                    <!-- Affichage des messages globaux -->
+                    <p:messages id="globalMessages" autoUpdate="true" />
+
+                    <p:panelGrid columns="1" cellpadding="5">
+
+                        <!-- Date de l'absence -->
+                        <p:outputLabel for="date" value="Date de l'absence: " />
+                        <p:calendar id="date" value="#{absenceBean.absence.date}"
+                                    required="true" pattern="dd/MM/yyyy" showOn="button" />
+
+                        <!-- Heure de début -->
+                        <h:outputLabel value="Heure d'absence:" for="heured" />
+                        <p:calendar id="heured" value="#{absenceBean.absence.heured}"
+                                    pattern="HH:mm" timeOnly="true" />
+
+                        <!-- Heure de fin -->
+                        <h:outputLabel value="Heure d'absence:" for="heuref" />
+                        <p:calendar id="heuref" value="#{absenceBean.absence.heuref}"
+                                    pattern="HH:mm" timeOnly="true" />
+
+                        <!-- Justification -->
+                        <p:outputLabel for="justification" value="Justification: " />
+                        <p:inputTextarea id="justification"
+                                         value="#{absenceBean.absence.justificatiion}" label="Justification"
+                                         rows="3" />
+
+                    </p:panelGrid>
+
+                    <!-- Bouton pour soumettre -->
+                    <p:commandButton value="Ajouter Absence"
+                                     action="#{absenceBean.addAbsence}" update="absenceForm" styleClass="p-button"/>
+                </p:panel>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.Ecole" table="ecole" schema="public" optimistic-lock="version">
+        <id name="idEcole" type="int">
+            <column name="id_ecole" />
+            <generator class="assigned" />
+        </id>
+        <property name="nom" type="string">
+            <column name="nom" length="254" />
+        </property>
+        <set name="salles" table="salle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ecole" />
+            </key>
+            <one-to-many class="entitee.Salle" />
+        </set>
+        <set name="busTransports" table="bus_transport" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ecole" />
+            </key>
+            <one-to-many class="entitee.BusTransport" />
+        </set>
+        <set name="infirmeries" table="infirmerie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ecole" />
+            </key>
+            <one-to-many class="entitee.Infirmerie" />
+        </set>
+        <set name="cantines" table="cantine" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ecole" />
+            </key>
+            <one-to-many class="entitee.Cantine" />
+        </set>
+        <set name="professeurs" table="asso_prof_ecole" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ecole" not-null="true" />
+            </key>
+            <many-to-many entity-name="entitee.Professeur">
+                <column name="id_professeur" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="eleves" table="eleve" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ecole" />
+            </key>
+            <one-to-many class="entitee.Eleve" />
+        </set>
+        <set name="batimentAdministratifs" table="batiment_administratif" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ecole" />
+            </key>
+            <one-to-many class="entitee.BatimentAdministratif" />
+        </set>
+    </class>
+</hibernate-mapping>

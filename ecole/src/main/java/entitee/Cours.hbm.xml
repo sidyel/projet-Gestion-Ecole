@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.Cours" table="cours" schema="public" optimistic-lock="version">
+        <id name="idCours" type="int">
+            <column name="id_cours" />
+            <generator class="assigned" />
+        </id>
+        <property name="description" type="string">
+            <column name="description" length="254" />
+        </property>
+        <property name="matiere" type="string">
+            <column name="matiere" length="254" />
+        </property>
+        <set name="assoClasseCourses" table="asso_classe_cours" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cours" not-null="true" />
+            </key>
+            <one-to-many class="entitee.AssoClasseCours" />
+        </set>
+        <set name="professeurs" table="professeur" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cours" />
+            </key>
+            <one-to-many class="entitee.Professeur" />
+        </set>
+        <set name="salles" table="asso_cours_salle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cours" not-null="true" />
+            </key>
+            <many-to-many entity-name="entitee.Salle">
+                <column name="id_salle" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="evaluations" table="evaluation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cours" />
+            </key>
+            <one-to-many class="entitee.Evaluation" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Créer une évaluation</title>
+    <!-- Styles supplémentaires -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('resources/images/bag3.jpg');
+            margin: 0;
+            padding: 0;
+            color: #5c4033; /* Marron foncé */
+        }
+
+        header {
+            background-color: #8b4513; /* Marron */
+            padding: 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        header .p-button {
+            background: transparent;
+            color: white;
+            border: none;
+        }
+
+        .container {
+            max-width: 850px;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 5rem;
+        }
+
+        .card-header {
+            background-color: #8b4513; /* Marron */
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #5c4033; /* Marron foncé */
+        }
+
+        .btn-primary {
+            background-color: #8b4513; /* Marron */
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #5c4033; /* Marron foncé */
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <!-- Header -->
+    <header>
+        <h2>Création d'Évaluation</h2>
+        <p:commandButton icon="pi pi-arrow-left" value="Retour" action="professeur_home.xhtml" styleClass="p-button" />
+    </header>
+
+    <!-- Formulaire de création d'évaluation -->
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h4>Créer une évaluation</h4>
+            </div>
+            <div class="card-body">
+                <h:form id="evaluationForm">
+                    <!-- Champ caché pour l'ID du professeur -->
+                    <h:inputHidden value="#{evaluationBean.profId}" />
+
+                    <!-- Sélection du cours -->
+                    <div class="mb-3">
+                        <p:outputLabel for="cours" value="Sélectionner un cours :" styleClass="form-label" />
+                        <p:selectOneMenu id="cours" value="#{evaluationBean.selectedCoursId}" styleClass="form-select">
+                            <f:selectItems value="#{evaluationBean.coursList}" var="cours" itemValue="#{cours.idCours}" itemLabel="#{cours.matiere}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <!-- Sélection de la classe -->
+                    <div class="mb-3">
+                        <p:outputLabel for="classe" value="Sélectionner une classe :" styleClass="form-label" />
+                        <p:selectOneMenu id="classe" value="#{evaluationBean.selectedClasseId}" styleClass="form-select">
+                            <f:selectItems value="#{evaluationBean.classesList}" var="classe" itemValue="#{classe.idclasse}" itemLabel="#{classe.nom}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <!-- Type d'évaluation -->
+                    <div class="mb-3">
+                        <p:outputLabel value="Type d'évaluation :" for="type" styleClass="form-label" />
+                        <p:selectOneMenu id="type" value="#{evaluationBean.evaluation.type}" required="true"
+                                         requiredMessage="Le type est obligatoire." styleClass="form-select">
+                            <f:selectItem itemLabel="Sélectionner le type" itemValue="" />
+                            <f:selectItem itemLabel="Devoir" itemValue="Devoir" />
+                            <f:selectItem itemLabel="Contrôle" itemValue="Contrôle" />
+                            <f:selectItem itemLabel="Composition" itemValue="Composition" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <!-- Date de l'évaluation -->
+                    <div class="mb-3">
+                        <p:outputLabel value="Date de l'évaluation :" for="date" styleClass="form-label" />
+                        <p:calendar id="date" value="#{evaluationBean.evaluation.date}" pattern="yyyy-MM-dd"
+                                    showButtonPanel="true" required="true" requiredMessage="La date est obligatoire."
+                                    styleClass="form-control" />
+                    </div>
+
+                    <!-- Heure de début -->
+                    <div class="mb-3">
+                        <p:outputLabel value="Heure de début :" for="startTime" styleClass="form-label" />
+                        <p:calendar id="startTime" value="#{evaluationBean.evaluation.hdebut}" pattern="HH:mm"
+                                    timeOnly="true" showButtonPanel="true" required="true"
+                                    requiredMessage="L'heure de début est obligatoire." styleClass="form-control" />
+                    </div>
+
+                    <!-- Heure de fin -->
+                    <div class="mb-3">
+                        <p:outputLabel value="Heure de fin :" for="endTime" styleClass="form-label" />
+                        <p:calendar id="endTime" value="#{evaluationBean.evaluation.hfin}" pattern="HH:mm"
+                                    timeOnly="true" showButtonPanel="true" required="true"
+                                    requiredMessage="L'heure de fin est obligatoire." styleClass="form-control" />
+                    </div>
+
+                    <!-- Bouton pour créer l'évaluation -->
+                    <div class="text-center">
+                        <p:commandButton value="Créer l'évaluation" action="#{evaluationBean.saveEvaluation}" update="evaluationForm"
+                                         styleClass="btn btn-primary" />
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

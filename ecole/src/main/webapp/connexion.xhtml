@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Connexion</title>
+    <h:outputStylesheet name="styles.css" />
+    <h:outputStylesheet library="primeicons" name="primeicons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+</h:head>
+
+<h:body style="background-image: url('resources/images/bag3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: rgba(0, 0, 0, 0.6); background-blend-mode: overlay;">
+    <!-- Header avec titre et bouton de retour -->
+    <header style="background-color: #8B4513; padding: 15px; color: white; display: flex; align-items: center; justify-content: space-between;">
+        <h2 style="margin: 0; display: flex; align-items: center;">
+            <i class="pi pi-sign-in" style="font-size: 1.5em; margin-right: 10px;"></i>
+            Connexion
+        </h2>
+        <p:button value="Retour" outcome="bienvenue.xhtml" icon="pi pi-home" style="background-color: white; color: #8B4513; border: none; padding: 10px 15px; font-weight: bold; border-radius: 5px;" />
+    </header>
+
+    <!-- Conteneur principal pour diviser en deux colonnes -->
+    <div class="p-grid" style="margin-top: 50px;">
+        <!-- Colonne de gauche : Formulaire de connexion -->
+        <div class="p-col-12 p-md-6" style="display: flex; justify-content: center;">
+            <h:form>
+                <p:panel header="Connexion" style="width: 90%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); background-color: rgba(255, 255, 255, 0.9); padding: 20px;">
+                    <!-- Affichage des messages d'erreur -->
+                    <p:messages autoUpdate="true" />
+
+                    <h:panelGrid columns="2" style="width: 100%; margin-top: 20px;">
+                        <p:outputLabel value="Login:" style="color: #8B4513; font-size: 1.1em;" />
+                        <p:inputText value="#{personneBean.personne.login}" style="width: 100%;" />
+
+                        <p:outputLabel value="Mot de passe:" style="color: #8B4513; font-size: 1.1em;" />
+                        <p:password value="#{personneBean.personne.password}" style="width: 100%;" />
+
+                        <p:commandButton value="Soumettre" icon="pi pi-check" action="#{personneBean.connexion}" style="width: 100%; margin-top: 20px; background-color: #8B4513; color: white; font-weight: bold; border-radius: 5px;" />
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </div>
+
+        <!-- Colonne de droite : Message de bienvenue et suggestion d'inscription -->
+        <div class="p-col-12 p-md-6" style="display: flex; align-items: center; justify-content: center;">
+            <div style="width: 80%; text-align: center;">
+                <h2 style="color: black;">Bienvenue !</h2>
+                <p style="font-size: 1.2em; color: white; line-height: 1.5;">
+                    Nous sommes ravis de vous revoir ! Si vous n'avez pas encore de compte, cliquez sur le bouton ci-dessous pour vous inscrire et commencer votre aventure avec nous.
+                </p>
+                <p:button value="S'inscrire" icon="pi pi-user-plus" outcome="choixInscription" style="margin-top: 20px; background-color: white; color: #8B4513; padding: 10px 20px; border: none; font-weight: bold; border-radius: 5px;" />
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

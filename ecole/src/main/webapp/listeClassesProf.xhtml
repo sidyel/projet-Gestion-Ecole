@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Liste des Classes</title>
+    <h:outputStylesheet name="styles.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+</h:head>
+
+<h:body>
+    <h:form id="classesProfForm">
+        <p:panel header="Mes Classes" style="width: 80%; margin: auto;">
+            <p:dataTable var="classe" value="#{evaluationBean.classesList}" 
+                         style="width: 100%;" 
+                         emptyMessage="Aucune classe trouvée pour ce professeur">
+                <p:column headerText="Nom de la Classe">
+                    <h:outputText value="#{classe.nom}" />
+                </p:column>
+                <p:column headerText="Actions">
+                    <!-- Bouton pour voir la liste des évaluations -->
+                    <p:commandButton value="Voir Évaluations" icon="pi pi-list"
+                 action="#{evaluationBean.listeEvaluation(classe.nom)}"
+                 process="@this" />
+
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

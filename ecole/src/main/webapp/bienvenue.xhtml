@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil - École</title>
+    <style>
+        /* Styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background: url('resources/images/bag3.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(139, 69, 19, 0.9); /* Marron foncé avec transparence */
+            color: #fff;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .nav .btn {
+            background-color: #fff;
+            color: #8B4513;
+            border: 2px solid #8B4513;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav .btn:hover {
+            background-color: #8B4513;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Section de description améliorée */
+        .description {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 30px auto;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #444;
+        }
+
+        .description h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #8B4513;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .description p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .description p:not(:last-child) {
+            border-left: 4px solid #8B4513;
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+
+        /* Carousel d'images défilant */
+        .carousel-container {
+            display: flex;
+            overflow: hidden;
+            max-width: 100%;
+            margin-top: 30px;
+            padding: 10px 0;
+        }
+
+        .carousel {
+            display: flex;
+            animation: scroll 15s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-100% / 3 * 3)); }
+        }
+
+        .carousel img {
+            width: 100%;
+            max-width: 30%;
+            height: auto;
+            margin: 0 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: rgba(139, 69, 19, 0.9);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1 class="logo">Cabis School</h1>
+        <nav class="nav">
+            <h:button value="Connexion" outcome="connexion.xhtml" styleClass="btn" />
+            <h:button value="Inscription" outcome="choixInscription.xhtml" styleClass="btn" />
+        </nav>
+    </header>
+
+    <!-- Section de description de l'école -->
+    <section class="description">
+        <h2>Bienvenue à Cabis School</h2>
+        <p>Notre école s'engage à offrir une éducation de qualité, en combinant tradition et innovation pour former les leaders de demain.</p>
+        <p>Depuis notre fondation, nous avons mis en place des méthodes pédagogiques qui encouragent la pensée critique, la créativité, et la responsabilité sociale.</p>
+        <p>Nous proposons une vaste gamme de programmes éducatifs conçus pour répondre aux besoins d'une société en constante évolution.</p>
+        <p>Nos enseignants sont dévoués et nos installations modernes permettent un apprentissage dans les meilleures conditions possibles.</p>
+        <p>Notre mission est de préparer nos étudiants à être des citoyens responsables et des acteurs du changement dans le monde.</p>
+    </section>
+
+    <!-- Section des images défilantes -->
+    <section class="carousel-container">
+        <div class="carousel">
+            <h:graphicImage library="images" name="cabis1.jfif" alt="Image de l'école" />
+            <h:graphicImage library="images" name="cabis2.jpg" alt="Image de l'école" />
+            <h:graphicImage library="images" name="cabis3.jpg" alt="Image de l'école" />
+            <h:graphicImage library="images" name="cabis4.jfif" alt="Image de l'école" />
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 École. Tous droits réservés.</p>
+        <p>Contactez-nous : cabischool@hotmail.fr</p>
+    </footer>
+</body>
+</html>

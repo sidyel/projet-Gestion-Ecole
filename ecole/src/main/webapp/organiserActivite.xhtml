@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Organiser Activité</title>
+    <h:outputStylesheet name="styles.css" />
+    <h:outputStylesheet library="primeicons" name="primeicons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+    <style>
+        /* Style de fond et configuration de la page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5dc; /* Beige clair pour le fond */
+            background-image: url('resources/images/bag3.jpg'); /* Image de fond */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #4b3621; /* Marron pour le texte */
+        }
+        header {
+            background-color: #8b5e3c; /* Marron pour l'en-tête */
+            padding: 10px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .pi {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        header .p-button {
+            background: transparent;
+            color: white;
+            border: none;
+            margin-right: 10px;
+        }
+        .panel-container {
+            max-width: 600px;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8); /* Fond de la boîte */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 2rem auto;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <!-- Header avec titre et navigation similaire -->
+    <header>
+        <h2>
+            <i class="pi pi-calendar-plus"></i>
+            Organiser Activité
+        </h2>
+        <div>
+            <p:commandButton icon="pi pi-home" value="Accueil" styleClass="p-button" 
+                 action="adminPortal.xhtml" />
+
+        </div>
+    </header>
+
+    <div class="p-d-flex p-jc-center p-mt-5">
+        <div class="panel-container">
+            <h:form id="formActivite">
+                <p:panel header="Organiser une nouvelle activité" style="width: 100%;">
+                    <h:panelGrid columns="2" styleClass="add-activite-form">
+
+                        <p:outputLabel value="Nom de l'activité :" for="nom" />
+                        <p:inputText id="nom" value="#{activiteExtraBean.activiteExtra.nom}" />
+
+                        <p:outputLabel value="Lieu de l'activité :" for="lieux" />
+                        <p:inputText id="lieux" value="#{activiteExtraBean.activiteExtra.lieux}" />
+
+                        <p:outputLabel value="Description :" for="description" />
+                        <p:inputTextarea id="description" value="#{activiteExtraBean.activiteExtra.description}" rows="4" cols="30" />
+
+                        <p:outputLabel value="Date de l'activité :" for="dateActivite" />
+                        <p:calendar id="dateActivite" value="#{activiteExtraBean.activiteExtra.dateActivite}" />
+
+                        <p:outputLabel value="Heure début :" for="heured" />
+                        <p:calendar id="heured" value="#{activiteExtraBean.activiteExtra.heured}" pattern="HH:mm" timeOnly="true" />
+
+                        <p:outputLabel value="Heure fin :" for="heuref" />
+                        <p:calendar id="heuref" value="#{activiteExtraBean.activiteExtra.heuref}" pattern="HH:mm" timeOnly="true" />
+
+                        <p:outputLabel value="Montant:" for="montant" />
+                        <p:inputText id="montant" value="#{activiteExtraBean.activiteExtra.frais}" />
+
+                        <p:commandButton value="Organiser l'activité" action="#{activiteExtraBean.organiserActivite}" update="formActivite" />
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+
+</html>

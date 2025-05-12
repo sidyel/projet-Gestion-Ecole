@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Ajouter Consultation Infirmerie</title>
+    <h:outputStylesheet name="styles.css" />
+    <h:outputStylesheet library="primeicons" name="primeicons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+    <style>
+        /* Style de fond et configuration de la page */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('resources/images/bag3.jpg'); /* Chemin de l'image de fond */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: rgba(153, 101, 21, 0.9); /* Couleur marron avec opacité */
+            padding: 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .pi {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        header .p-button {
+            background: transparent;
+            color: white;
+            border: none;
+            margin-right: 10px;
+        }
+        .panel-container {
+            max-width: 600px;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8); /* Fond de la boîte */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 2rem auto;
+        }
+        /* Style pour les boutons principaux */
+        .p-button {
+            background-color: #9b6515; /* Marron */
+            border-color: #9b6515;
+        }
+        .p-button:hover {
+            background-color: #7a4c10; /* Couleur marron foncé au survol */
+            border-color: #7a4c10;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <!-- Header avec titre et navigation similaire -->
+    <header>
+        <h2>
+            <i class="pi pi-user-plus"></i>
+            Ajouter Consultation Infirmerie
+        </h2>
+        <div>
+            <p:commandButton icon="pi pi-home" value="Accueil" styleClass="p-button" />
+            <p:commandButton icon="pi pi-arrow-left" value="Retour" action="infirmerieHome.xhtml" styleClass="p-button" />
+            <p:commandButton icon="pi pi-sign-out" value="Déconnexion" action="#{surveillantBean.logout}" styleClass="p-button" />
+        </div>
+    </header>
+
+    <div class="p-d-flex p-jc-center p-mt-5">
+        <div class="panel-container">
+            <h:form>
+                <p:panel header="Ajouter une nouvelle consultation" style="width: 100%;">
+
+                    <p:panelGrid columns="1" styleClass="add-infirmerie-form">
+
+                        <h:outputLabel for="dateVisite" value="Date de la visite :" />
+                        <p:calendar id="dateVisite" value="#{infirmerieBean.infirmerie.dateVisite}" pattern="dd/MM/yyyy" showButtonPanel="true" />
+
+                        <h:outputLabel for="motifVisite" value="Motif de la visite :" />
+                        <p:inputText id="motifVisite" value="#{infirmerieBean.infirmerie.motifvisite}" />
+
+                        <h:outputLabel for="diagnostic" value="Diagnostic :" />
+                        <p:inputTextarea id="diagnostic" value="#{infirmerieBean.infirmerie.diagnostic}" rows="3" cols="40" />
+
+                        <h:outputLabel for="medicaments" value="Médicaments administrés :" />
+                        <p:inputTextarea id="medicaments" value="#{infirmerieBean.infirmerie.medicamentsAdministres}" rows="3" cols="40" />
+
+                        <p:commandButton value="Ajouter Consultation" action="#{infirmerieBean.ajouterConsultation}" update="messages" />
+                        <p:messages id="messages" showDetail="true" showSummary="false" autoUpdate="true" />
+                    </p:panelGrid>
+                </p:panel>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+
+</html>

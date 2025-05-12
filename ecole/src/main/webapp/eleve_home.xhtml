@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Tableau de bord Élève</title>
+    <h:outputStylesheet name="styles.css" />
+    <h:outputStylesheet library="primeicons" name="primeicons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+</h:head>
+
+<h:body style="background-image: url('resources/images/bag3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: rgba(0, 0, 0, 0.6); background-blend-mode: overlay;">
+    <!-- Overlay semi-transparente -->
+    <div class="overlay"></div>
+    
+    <!-- Header avec titre et icônes de navigation -->
+    <header style="background-color: #8B4513; padding: 15px; color: white; display: flex; align-items: center; justify-content: space-between;">
+        <h2 style="margin: 0; display: flex; align-items: center;">
+            <i class="pi pi-user" style="font-size: 1.5em; margin-right: 10px;"></i>
+            Tableau de bord Élève
+        </h2>
+        <div>
+            <p:commandButton icon="pi pi-home" value="Accueil"  action="eleve_home?faces-redirect=true" style="background: transparent; color: white; border: none; margin-right: 10px;" />
+            <p:commandButton icon="pi pi-sign-out" value="Déconnexion" action="#{portalBean.logout}" style="background: transparent; color: white; border: none;" />
+
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <h:form>
+        <!-- En-tête avec le nom de l'élève et une photo de profil -->
+        <p:panel header="Bienvenue sur votre tableau de bord" style="width: 90%; margin: 0 auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); background-color: rgba(255, 255, 255, 0.9); padding: 20px; text-align:center;">
+            <h:graphicImage name="images/elevehome.jfif" alt="Photo de profil de l'élève" style="width:100px; border-radius:50%; margin-bottom:10px;" />
+            <h2 style="color:#8B4513; margin-top:10px;">Bonjour, <h:outputText value="#{sessionScope.nomEleve}" /></h2>
+        </p:panel>
+
+        <!-- Informations rapides sur l'élève -->
+        <p:panelGrid columns="2" styleClass="custom-panelgrid" style="margin-top:30px;">
+            <p:panel header="Nombre d'absences" style="text-align:center; background-color: #e9ecef; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                <h:outputText value="#{sessionScope.nombreAbsences}" style="font-size:24px; color:#ff0000;" />
+            </p:panel>
+
+           <p:panel header="Moyenne générale" style="text-align:center; background-color: #e9ecef; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+    <h:outputText value="#{sessionScope.moyenneGenerale != 0 ? sessionScope.moyenneGenerale : 'Moyenne non calculée'}" 
+                  style="font-size:24px; color:#28a745;" />
+</p:panel>
+
+        </p:panelGrid>
+
+        <!-- Boutons de navigation -->
+        <p:panelGrid columns="3" style="margin-top:20px; width: 80%; margin: 0 auto; text-align: center;">
+            <p:commandButton 
+                value="Mes évaluations" 
+                icon="pi pi-file" 
+                action="#{portalBean.naviguerVersEvaluations()}" 
+                style="background-color: #8B4513; color: white; font-weight: bold; padding: 10px; border-radius: 5px; width: 100%;" 
+            />
+            <p:commandButton 
+                value="Mon emploi du temps" 
+                icon="pi pi-calendar"  
+                action="#{portalBean.naviguerVersEmploiDuTemps()}" 
+                style="background-color: #8B4513; color: white; font-weight: bold; padding: 10px; border-radius: 5px; width: 100%;" 
+            />
+            <p:commandButton 
+                value="Mes résultats" 
+                icon="pi pi-chart-line" 
+                action="#" 
+                style="background-color: #8B4513; color: white; font-weight: bold; padding: 10px; border-radius: 5px; width: 100%;" 
+            />
+        </p:panelGrid>
+    </h:form>
+</h:body>
+
+</html>

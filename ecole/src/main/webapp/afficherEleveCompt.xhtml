@@ -1,0 +1,154 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Recherche d'élèves</title>
+    <h:outputStylesheet name="styles.css" />
+    <h:outputStylesheet library="primeicons" name="primeicons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            background-image: url('resources/images/bag3.jpg'); /* Ajouter l'image d'arrière-plan */
+            background-size: cover; /* S'assure que l'image couvre toute la surface */
+            background-position: center center; /* Centrer l'image */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #6f4f1f; /* Marron pour le header */
+            padding: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .pi {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent pour le conteneur */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .search-section {
+            margin-bottom: 2rem;
+        }
+        .search-section .p-panelgrid {
+            gap: 1rem;
+        }
+        .search-section .p-button {
+            width: 100%;
+            background-color: #6f4f1f; /* Marron pour les boutons */
+            color: white;
+            border: none;
+            padding: 1rem;
+        }
+        .search-section .p-button:hover {
+            background-color: #5a3e18; /* Marron foncé au survol */
+        }
+        .data-table {
+            width: 100%;
+            margin-top: 2rem;
+            border-collapse: collapse;
+        }
+        .data-table th, .data-table td {
+            padding: 12px;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #f1f1f1;
+            border-bottom: 2px solid #ddd;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        .data-table .p-button {
+            background-color: #6f4f1f; /* Marron pour les boutons dans le tableau */
+            color: white;
+            border: none;
+        }
+        .data-table .p-button:hover {
+            background-color: #5a3e18; /* Marron foncé au survol */
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <!-- Header -->
+    <header>
+        <h2>
+            <i class="pi pi-search"></i>
+            Recherche d'élèves
+        </h2>
+    </header>
+
+    <!-- Conteneur principal -->
+    <div class="container">
+        <!-- Formulaire de recherche -->
+        <h:form>
+            <div class="search-section">
+                <h3 class="section-title">Critères de recherche</h3>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Nom : " />
+                    <p:inputText value="#{eleveBean.nom}" placeholder="Entrez le nom" />
+
+                    <h:outputLabel value="Prénom : " />
+                    <p:inputText value="#{eleveBean.prenom}" placeholder="Entrez le prénom" />
+                </h:panelGrid>
+
+                <p:commandButton value="Rechercher" 
+                                 action="#{eleveBean.rechercherEleve}" 
+                                 update="elevesTable" 
+                                 styleClass="p-button" 
+                                 icon="pi pi-search" />
+            </div>
+
+            <!-- Tableau des résultats -->
+            <h3 class="section-title">Résultats de la recherche</h3>
+            <p:dataTable id="elevesTable" value="#{eleveBean.eleveListe}" var="eleve" 
+                         styleClass="data-table" paginator="true" rows="10">
+                <p:column headerText="Nom">
+                    <h:outputText value="#{eleve.personne.nom}" />
+                </p:column>
+                <p:column headerText="Prénom">
+                    <h:outputText value="#{eleve.personne.prenom}" />
+                </p:column>
+                <p:column headerText="Adresse">
+                    <h:outputText value="#{eleve.personne.adresse}" />
+                </p:column>
+                <p:column headerText="Date de Naissance">
+                    <h:outputText value="#{eleve.personne.datenaissance}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Action">
+                    <p:button style="width:100%" value="Detail" outcome="detailEleveCompt">
+                        <f:param name="code" value="#{eleve.idEleve}" />
+                    </p:button>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </div>
+</h:body>
+</html>

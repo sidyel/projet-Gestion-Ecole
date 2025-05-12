@@ -1,0 +1,120 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Person List</title>
+    <h:outputStylesheet name="styles.css" />
+    <h:outputStylesheet library="primeicons" name="primeicons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+    
+    
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('resources/images/bag3.jpg'); /* Chemin vers l'image de fond */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #8B4513;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .pi {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        header .p-button {
+            background: transparent;
+            color: white;
+            border: none;
+            margin-right: 10px;
+        }
+        .portal-container {
+            max-width: 850px;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8); /* Opacité pour lisibilité */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 2rem auto;
+        }
+        .portal-header {
+            font-size: 2rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+    </style>
+</h:head>
+
+<f:metadata>
+    <f:viewParam name="code" value="#{evaluationBean.ideval}" />
+    <f:viewAction action="#{evaluationBean.listerAssEleEval}" />
+    
+</f:metadata>
+
+<h:body>
+    <!-- Header avec titre -->
+    <header>
+        <h2>
+            <i class="pi pi-list"></i>
+            Liste des Évaluations
+        </h2>
+    </header>
+
+    <div class="p-d-flex p-jc-center p-mt-5">
+        <div class="portal-container">
+            <h1 class="portal-header">Portail d'Évaluations des Élèves</h1>
+
+            <h:form id="form">
+                <p:messages autoUpdate="true" />
+
+               <h:panelGrid columns="2" rendered="false">
+    <h:outputLabel value="Nom de la Classe : " />
+    <p:inputText value="#{evaluationEleveBean.nomClasse}" />
+</h:panelGrid>
+
+<p:commandButton value="Rechercher" action="#{evaluationEleveBean.listerAssEleEval}" update="@form" rendered="false" />
+
+
+                <p:panel header="Liste des Évaluations">
+                    <p:dataTable value="#{evaluationBean.assoEleveEvaluations}" var="e" editable="true">
+                        <p:column headerText="Nom">
+                            <h:outputText value="#{e.eleve.personne.nom}" />
+                        </p:column>
+
+                        <p:column headerText="Prénom">
+                            <h:outputText value="#{e.eleve.personne.prenom}" />
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            <p:inputText value="#{e.note}" style="width:50px" />
+                        </p:column>
+
+                       
+                    </p:dataTable>
+                </p:panel>
+                
+                <p:commandButton value="Sauvegarder"
+                                 action="#{evaluationEleveBean.sauvegarderNote}"
+                                 update="@form" />
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

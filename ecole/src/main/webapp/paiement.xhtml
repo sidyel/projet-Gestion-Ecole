@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Effectuer Paiement</title>
+    <h:outputStylesheet name="styles.css" />
+    <h:outputStylesheet library="primeicons" name="primeicons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+    <style>
+        /* Style de fond et configuration de la page */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('resources/images/bg1.avif'); /* Chemin de l'image de fond */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #6f4f28; /* Marron */
+            padding: 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .pi {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        header .p-button {
+            background: transparent;
+            color: white;
+            border: none;
+            margin-right: 10px;
+        }
+        .panel-container {
+            max-width: 600px;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8); /* Fond de la boîte */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 2rem auto;
+        }
+        .p-button {
+            background-color: #6f4f28; /* Marron */
+            border-color: #6f4f28; /* Marron */
+        }
+        .p-button:hover {
+            background-color: #5a3d1f; /* Marron plus foncé au survol */
+            border-color: #5a3d1f;
+        }
+    </style>
+</h:head>
+
+<f:metadata>
+    <f:viewParam name="code2" value="#{paiementBean.eleveId}" />
+</f:metadata>
+
+<h:body>
+    <!-- Header avec titre et navigation similaire -->
+    <header>
+        <h2>
+            <i class="pi pi-credit-card"></i>
+            Effectuer Paiement
+        </h2>
+        <div>
+            <p:commandButton icon="pi pi-home" value="Accueil" styleClass="p-button" />
+            <p:commandButton icon="pi pi-arrow-left" value="Retour" action="paiementHome.xhtml" styleClass="p-button" />
+            <p:commandButton icon="pi pi-sign-out" value="Déconnexion" action="#{surveillantBean.logout}" styleClass="p-button" />
+        </div>
+    </header>
+
+    <div class="p-d-flex p-jc-center p-mt-5">
+        <div class="panel-container">
+            <h:form>
+                <p:panel header="Effectuer un Paiement" style="width: 100%; background-color: #6f4f28; color: white;">
+                    <p:messages />
+                    <h:panelGrid columns="1" styleClass="payment-form">
+
+                        <!-- Date de paiement -->
+                        <p:outputLabel value="Date de Paiement:" />
+                        <p:calendar value="#{paiementBean.paiement.datePaiement}" pattern="dd/MM/yyyy" />
+
+                        <!-- Montant -->
+                        <p:outputLabel value="Montant:" />
+                        <p:inputText value="#{paiementBean.paiement.montant}">
+                            <f:convertNumber />
+                        </p:inputText>
+
+                        <!-- Type de paiement -->
+                        <p:outputLabel for="typePaiement" value="Type de Paiement:" />
+                        <p:selectOneRadio id="typePaiement" value="#{paiementBean.paiement.typePaiement}" layout="grid" columns="3">
+                            <f:selectItem itemLabel="Espèces" itemValue="Espèces" />
+                            <f:selectItem itemLabel="Wave" itemValue="Wave" />
+                            <f:selectItem itemLabel="Orange Money" itemValue="Orange Money" />
+                        </p:selectOneRadio>
+
+                        <!-- Statut de paiement -->
+                        <p:outputLabel value="Statut de Paiement:" />
+                        <p:inputText value="#{paiementBean.paiement.statutPaiement}" />
+
+                        <!-- Mois -->
+                        <p:outputLabel value="Mois:" />
+                        <p:selectOneMenu value="#{paiementBean.paiement.mois}">
+                            <f:selectItem itemLabel="Sélectionner" itemValue="" />
+                            <f:selectItem itemLabel="Janvier" itemValue="Janvier" />
+                            <f:selectItem itemLabel="Février" itemValue="Février" />
+                            <f:selectItem itemLabel="Mars" itemValue="Mars" />
+                            <f:selectItem itemLabel="Avril" itemValue="Avril" />
+                            <f:selectItem itemLabel="Mai" itemValue="Mai" />
+                            <f:selectItem itemLabel="Juin" itemValue="Juin" />
+                            <f:selectItem itemLabel="Juillet" itemValue="Juillet" />
+                            <f:selectItem itemLabel="Août" itemValue="Août" />
+                            <f:selectItem itemLabel="Septembre" itemValue="Septembre" />
+                            <f:selectItem itemLabel="Octobre" itemValue="Octobre" />
+                            <f:selectItem itemLabel="Novembre" itemValue="Novembre" />
+                            <f:selectItem itemLabel="Décembre" itemValue="Décembre" />
+                        </p:selectOneMenu>
+
+                        <!-- Bouton pour effectuer le paiement -->
+                        <p:commandButton value="Effectuer Paiement" action="#{paiementBean.effectuerPaiement}" update="@form" styleClass="p-button"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

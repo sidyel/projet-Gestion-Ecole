@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.ActiviteExtra" table="activite_extra" schema="public" optimistic-lock="version">
+        <id name="idActivite" type="int">
+            <column name="id_activite" />
+            <generator class="assigned" />
+        </id>
+        <property name="dateActivite" type="date">
+            <column name="date_activite" length="13" />
+        </property>
+        <property name="heured" type="java.lang.Integer">
+            <column name="heured" />
+        </property>
+        <property name="heuref" type="java.lang.Integer">
+            <column name="heuref" />
+        </property>
+        <property name="nom" type="string">
+            <column name="nom" length="254" />
+        </property>
+        <set name="eleves" table="asso_eleve_activite" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_activite" not-null="true" />
+            </key>
+            <many-to-many entity-name="entitee.Eleve">
+                <column name="id_eleve" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

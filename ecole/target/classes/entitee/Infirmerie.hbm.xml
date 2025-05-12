@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.Infirmerie" table="infirmerie" schema="public" optimistic-lock="version">
+        <id name="idinfirmerie" type="int">
+            <column name="idinfirmerie" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ecole" class="entitee.Ecole" fetch="select">
+            <column name="id_ecole" />
+        </many-to-one>
+        <property name="dateVisite" type="date">
+            <column name="date_visite" length="13" />
+        </property>
+        <property name="diagnostic" type="string">
+            <column name="diagnostic" length="254" />
+        </property>
+        <property name="motifvisite" type="string">
+            <column name="motifvisite" length="254" />
+        </property>
+        <set name="eleves" table="eleve" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idinfirmerie" />
+            </key>
+            <one-to-many class="entitee.Eleve" />
+        </set>
+    </class>
+</hibernate-mapping>

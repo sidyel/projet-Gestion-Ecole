@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Gestion des Évaluations</title>
+    <h:outputStylesheet name="styles.css" />
+    <h:outputStylesheet library="primeicons" name="primeicons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+</h:head>
+
+<h:body style="background-image: url('resources/images/bag3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-color: rgba(0, 0, 0, 0.6); background-blend-mode: overlay;">
+    <!-- Header avec titre -->
+    <header style="background-color: #8B4513; padding: 15px; color: white; display: flex; align-items: center; justify-content: space-between;">
+        <h2 style="margin: 0; display: flex; align-items: center;">
+            <i class="pi pi-file" style="font-size: 1.5em; margin-right: 10px;"></i>
+            Gestion des Évaluations
+        </h2>
+        <div>
+           <p:commandButton 
+    icon="pi pi-home" 
+    value="Accueil" 
+    action="eleve_home?faces-redirect=true" 
+    style="background-color: transparent; color: white; border: none; padding: 10px 15px; font-weight: bold; border-radius: 5px;" />
+
+             <p:commandButton icon="pi pi-sign-out" value="Déconnexion" action="#{portalBean.logout}" style="background: transparent; color: white; border: none;" />
+        </div>
+    </header>
+
+    <!-- Section pour afficher les évaluations -->
+    <h:form id="form">
+        <p:panel header="Rechercher des évaluations" 
+         style="width: 90%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); background-color: rgba(255, 255, 255, 0.9); padding: 20px; margin-top: 20px;"
+         rendered="false">
+    <h:panelGrid columns="2">
+        <h:outputLabel value="Nom de la Classe :" style="color: #8B4513; font-size: 1.1em;" />
+        <p:inputText value="#{evaluationBean.nomClasse}" style="width: 100%;" />
+    </h:panelGrid>
+
+    <p:commandButton value="Rechercher"
+                     action="#{evaluationBean.listeEvaluation}"
+                     update="form"
+                     style="width: 100%; margin-top: 20px; background-color: #8B4513; color: white; font-weight: bold; border-radius: 5px;" />
+</p:panel>
+
+
+        <!-- Liste des évaluations -->
+        <p:panel header="Liste des Évaluations" style="width: 90%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); background-color: rgba(255, 255, 255, 0.9); padding: 20px; margin-top: 20px;">
+            <p:dataTable id="evalTable" value="#{evaluationBean.evaluations}" var="eval" style="margin-top: 20px;" rows="10" paginator="true">
+                <p:column headerText="Cours">
+                    <h:outputText value="#{eval.cours.matiere}" />
+                </p:column>
+                <p:column headerText="Type">
+                    <h:outputText value="#{eval.type}" />
+                </p:column>
+                <p:column headerText="Date">
+                    <h:outputText value="#{eval.date}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Heure de début">
+                    <h:outputText value="#{eval.hdebut}">
+                        <f:convertDateTime pattern="HH:mm" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Heure de fin">
+                    <h:outputText value="#{eval.hfin}">
+                        <f:convertDateTime pattern="HH:mm" />
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

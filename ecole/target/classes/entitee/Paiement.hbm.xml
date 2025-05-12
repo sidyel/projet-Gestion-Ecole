@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.Paiement" table="paiement" schema="public" optimistic-lock="version">
+        <id name="idPaiement" type="int">
+            <column name="id_paiement" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="eleve" class="entitee.Eleve" fetch="select">
+            <column name="id_eleve" />
+        </many-to-one>
+        <property name="datePaiement" type="date">
+            <column name="date_paiement" length="13" />
+        </property>
+        <property name="montant" type="java.lang.Integer">
+            <column name="montant" />
+        </property>
+        <property name="typePaiement" type="string">
+            <column name="type_paiement" length="254" />
+        </property>
+    </class>
+</hibernate-mapping>

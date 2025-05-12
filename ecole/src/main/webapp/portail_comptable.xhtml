@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Accueil Comptable</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css" />
+    <style>
+        body {
+            background-image: url('resources/images/bag3.jpg'); /* Changer l'image de fond */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #8B4513; /* Marron */
+            padding: 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        header .pi {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        .card {
+            transition: transform 0.3s;
+            background-color: rgba(255, 255, 255, 0.9); /* Opacité pour lisibilité */
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .main-content {
+            margin-top: 3rem;
+        }
+        .btn-container {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+        .btn-secondary {
+            background-color: #8B4513; /* Marron */
+            border-color: #8B4513;
+        }
+        .btn-secondary:hover {
+            background-color: #7A3B11; /* Marron foncé au survol */
+            border-color: #7A3B11;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <!-- En-tête avec Titre et Icône -->
+    <header>
+        <h2>
+            <i class="pi pi-money-bill"></i>
+            Accueil Comptable
+        </h2>
+    </header>
+
+    <div class="container main-content">
+        <!-- Titre principal -->
+        <h1 class="text-center mb-4">Portail du Comptable</h1>
+
+        <!-- Texte de bienvenue -->
+        <p class="text-center lead mb-4">
+            Bienvenue sur votre portail. Utilisez les options ci-dessous pour gérer les finances et suivre les paiements des élèves.
+        </p>
+
+        <!-- Section de boutons -->
+        <div class="btn-container">
+            <div class="card text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Gérer les paiements</h5>
+                    <p:button value="Gérer" icon="pi pi-credit-card"
+                              styleClass="btn btn-secondary btn-lg"
+                              outcome="afficherEleveCompt.xhtml" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</h:body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choix Inscription - École Cabis School</title>
+    <style>
+        /* Styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('resources/images/bag3.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #5a4632; /* Marron foncé */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background-color: #8B5E3C; /* Marron foncé */
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .home-button {
+            color: #fff;
+            background-color: #C19A6B; /* Beige foncé */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .home-button:hover {
+            background-color: #B88A6A; /* Marron clair */
+        }
+
+        /* Conteneur principal */
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            background-color: #F3E5D0; /* Beige clair */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* Section formulaire */
+        .form-section {
+            flex: 1;
+            padding: 40px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #5A4632; /* Marron foncé */
+            font-size: 1.8rem;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            margin: 15px 0;
+            padding: 15px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #8B5E3C; /* Marron foncé */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #A46C42; /* Marron moyen */
+        }
+
+        /* Section image */
+        .image-section {
+            flex: 1;
+            background-image: url('resources/images/cabis5.jfif');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #8B5E3C; /* Marron foncé */
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header avec bouton retour à l'accueil -->
+    <header class="header">
+        <h1>Cabis School</h1>
+        <a href="bienvenue.xhtml" class="home-button">Accueil</a>
+    </header>
+
+    <!-- Conteneur principal avec formulaire et image -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Section formulaire -->
+            <div class="form-section">
+                <h2>Choisissez votre type d'inscription</h2>
+                <h:form>
+                    <h:commandButton value="Inscription Élève" action="inscription.xhtml" styleClass="btn" />
+                    <h:commandButton value="Inscription Professeur" action="inscriptionProfesseur.xhtml" styleClass="btn" />
+                    <h:commandButton value="Inscription Personnel" action="inscriptionPersonnel.xhtml" styleClass="btn" />
+                </h:form>
+            </div>
+
+            <!-- Section image -->
+            <div class="image-section">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 École. Tous droits réservés.</p>
+        <p>Contactez-nous : cabischool@hotmail.fr</p>
+    </footer>
+</body>
+</html>

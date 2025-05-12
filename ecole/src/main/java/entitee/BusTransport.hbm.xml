@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.BusTransport" table="bus_transport" schema="public" optimistic-lock="version">
+        <id name="idBus" type="int">
+            <column name="id_bus" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ecole" class="entitee.Ecole" fetch="select">
+            <column name="id_ecole" />
+        </many-to-one>
+        <property name="horaires" type="string">
+            <column name="horaires" length="254" />
+        </property>
+        <property name="itineraire" type="string">
+            <column name="itineraire" length="254" />
+        </property>
+        <property name="prix" type="java.lang.Integer">
+            <column name="prix" />
+        </property>
+        <set name="eleves" table="eleve" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_bus" />
+            </key>
+            <one-to-many class="entitee.Eleve" />
+        </set>
+    </class>
+</hibernate-mapping>

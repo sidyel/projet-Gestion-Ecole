@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.AssoClasseCours" table="asso_classe_cours" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="entitee.AssoClasseCoursId">
+            <key-property name="idCours" type="int">
+                <column name="id_cours" />
+            </key-property>
+            <key-property name="idclasse" type="int">
+                <column name="idclasse" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="classes" class="entitee.Classes" update="false" insert="false" fetch="select">
+            <column name="idclasse" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cours" class="entitee.Cours" update="false" insert="false" fetch="select">
+            <column name="id_cours" not-null="true" />
+        </many-to-one>
+        <property name="date" type="date">
+            <column name="date" length="13" />
+        </property>
+        <property name="heured" type="timestamp">
+            <column name="heured" length="29" />
+        </property>
+        <property name="heuref" type="timestamp">
+            <column name="heuref" length="29" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3 sept. 2024, 20:23:09 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="entitee.Absence" table="absence" schema="public" optimistic-lock="version">
+        <id name="idabsence" type="int">
+            <column name="idabsence" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="eleve" class="entitee.Eleve" fetch="select">
+            <column name="id_eleve" />
+        </many-to-one>
+        <property name="date" type="date">
+            <column name="date" length="13" />
+        </property>
+        <property name="heured" type="java.lang.Integer">
+            <column name="heured" />
+        </property>
+        <property name="heuref" type="java.lang.Integer">
+            <column name="heuref" />
+        </property>
+        <property name="justificatiion" type="string">
+            <column name="justificatiion" length="254" />
+        </property>
+    </class>
+</hibernate-mapping>
